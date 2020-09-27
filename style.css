@@ -20,7 +20,12 @@
     align-items: center;
     background-color: hsl(var(--hue), 100%, 20%);
   }
-  
+  h1{
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: blue;
+      text-align: center;
+  }
+
   body.correct {
     --hue: var(--hue-correct);
   }

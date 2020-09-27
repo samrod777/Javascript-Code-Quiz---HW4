@@ -4,6 +4,10 @@ const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
+var timeEl = document.querySelector('.time');
+var mainEl = document.getElementById('main');
+
+var secondsLeft = 60;
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -19,6 +23,7 @@ function startGame() {
   currentQuestionIndex = 0
   questionContainerElement.classList.remove('hide')
   setNextQuestion()
+  setTime()
 }
 
 function setNextQuestion() {
@@ -79,35 +84,115 @@ function clearStatusClass(element) {
 
 const questions = [
   {
-    question: 'What is 2 + 2?',
+    question: 'When a user views a page containing a JavaScript program, which machine actually executes the script?',
     answers: [
-      { text: '4', correct: true },
-      { text: '22', correct: false }
+      { text: 'The User\'s machine running a Web browser', correct: true },
+      { text: 'The Web server', correct: false },
+      { text: 'A central machine in a corporate office', correct: false },
+      { text: 'Yo mama\'s computer', correct: false }
+    ]
+  },
+
+  {
+    question: 'What is the correct JavaScript syntax to write "Hello World"?',
+    answers: [
+      { text: 'System.out.println("Hello World")', correct: false },
+      { text: 'println ("Hello World")', correct: false },
+      { text: 'document.write("Hello World")', correct: true },
+      { text: 'response.write("Hello World")', correct: false }
     ]
   },
   {
-    question: 'Who is the best YouTuber?',
+    question: 'What is the correct syntax for referring to an external script called " abc.js"?',
     answers: [
-      { text: 'Web Dev Simplified', correct: true },
-      { text: 'Traversy Media', correct: true },
-      { text: 'Dev Ed', correct: true },
-      { text: 'Fun Fun Function', correct: true }
+      { text: '<script href=" abc.js">', correct: false },
+      { text: '<script name=" abc.js">', correct: false },
+      { text: '<script src=" abc.js">', correct: true },
+      { text: 'I don\'t know! Is it beer time?', correct: false }
     ]
   },
   {
-    question: 'Is web development fun?',
+    question: 'If para1 is the DOM object for a paragraph, what is the correct syntax to change the text within the paragraph?',
     answers: [
-      { text: 'Kinda', correct: false },
-      { text: 'YES!!!', correct: true },
-      { text: 'Um no', correct: false },
-      { text: 'IDK', correct: false }
+      { text: '"New Text"?', correct: false },
+      { text: 'para1.value="New Text";', correct: true },
+      { text: 'para1.firstChild.nodeValue= "New Text";', correct: false },
+      { text: 'para1.nodeValue="New Text";', correct: false }
     ]
   },
   {
-    question: 'What is 4 * 2?',
+    question: 'What is meant by the "this" keyword in javascript?',
     answers: [
-      { text: '6', correct: false },
-      { text: '8', correct: true }
+      { text: 'It refers current object', correct: true },
+      { text: 'It referes previous object', correct: false },
+      { text: 'It is variable which contains value', correct: false },
+      { text: 'It depends on what the meaning of "this" is', correct: false }
+    ]
+  },
+  {
+    question: 'Why do JavaScript and Java have similar name?',
+    answers: [
+      { text: 'JavaScript is a stripped-down version of Java', correct: false },
+      { text: 'JavaScript\'s syntax is loosely based on Java\'s', correct: true },
+      { text: 'They both originated on the island of Java', correct: false },
+      { text: 'Who knows, I need coffee', correct: false }
+    ]
+  },
+  {
+    question: 'Which built-in method adds one or more elements to the end of an array and returns the new length of the array?',
+    answers: [
+      { text: 'last()', correct: false },
+      { text: 'put()', correct: false },
+      { text: 'push()', correct: true },
+      { text: 'addthelast()', correct: false }
+    ]
+  },
+  {
+    question: 'Which built-in method returns the calling string value converted to lower case?',
+    answers: [
+      { text: 'toLowerCase()', correct: true },
+      { text: 'toLower()', correct: false },
+      { text: 'changeCase(case)', correct: false },
+      { text: 'None of the above.', correct: false }
+    ]
+  },
+  {
+    question: 'Which of the following function of Array object joins all elements of an array into a string?',
+    answers: [
+      { text: 'concat()', correct: false },
+      { text: 'join()', correct: true },
+      { text: 'pop()', correct: false },
+      { text: 'map()', correct: false }
+    ]
+  },
+  {
+    question: 'Which of the following code creates an object?',
+    answers: [
+      { text: 'var book = Object();', correct: false },
+      { text: 'var book = new Object();', correct: true },
+      { text: 'var book = new OBJECT();', correct: false },
+      { text: 'var book = new Book();', correct: false }
     ]
   }
 ]
+
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft + " seconds left";
+
+    if(secondsLeft === 0) {
+      clearInterval(timerInterval);
+      sendMessage();
+    }
+
+  }, 1000);
+}
+
+function sendMessage() {
+  timeEl.textContent = "Time is up! ";
+
+
+}
+
+// setTime();
