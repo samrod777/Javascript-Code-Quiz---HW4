@@ -22,8 +22,9 @@ function startGame() {
   shuffledQuestions = questions.sort(() => Math.random() - .5)
   currentQuestionIndex = 0
   questionContainerElement.classList.remove('hide')
-  setNextQuestion()
   setTime()
+  setNextQuestion()
+  
 }
 
 function setNextQuestion() {
@@ -36,6 +37,7 @@ function showQuestion(question) {
   question.answers.forEach(answer => {
     const button = document.createElement('button')
     button.innerText = answer.text
+
     button.classList.add('btn')
     if (answer.correct) {
       button.dataset.correct = answer.correct
@@ -62,6 +64,7 @@ function selectAnswer(e) {
   })
   if (shuffledQuestions.length > currentQuestionIndex + 1) {
     nextButton.classList.remove('hide')
+    
   } else {
     startButton.innerText = 'Restart'
     startButton.classList.remove('hide')
@@ -72,7 +75,8 @@ function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
     element.classList.add('correct')
-  } else {
+  } 
+  else {
     element.classList.add('wrong')
   }
 }
@@ -81,6 +85,33 @@ function clearStatusClass(element) {
   element.classList.remove('correct')
   element.classList.remove('wrong')
 }
+
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft + " seconds left";
+
+    if(secondsLeft === 0) {
+      clearInterval(timerInterval);
+      sendMessage();
+
+    }
+
+  }, 1000);
+}
+
+function sendMessage() {
+  timeEl.textContent = "Time is up! ";
+
+}
+
+// function score (){
+//   var score = 0
+//   for (correct = true; i <= length - 1; i++) {
+//     password = password + CombinedCharacters[Math.floor(Math.random() * CombinedCharacters.length)]; 
+//   }
+//   return password
+// }
 
 const questions = [
   {
@@ -92,7 +123,6 @@ const questions = [
       { text: 'Yo mama\'s computer', correct: false }
     ]
   },
-
   {
     question: 'What is the correct JavaScript syntax to write "Hello World"?',
     answers: [
@@ -176,23 +206,3 @@ const questions = [
   }
 ]
 
-function setTime() {
-  var timerInterval = setInterval(function() {
-    secondsLeft--;
-    timeEl.textContent = secondsLeft + " seconds left";
-
-    if(secondsLeft === 0) {
-      clearInterval(timerInterval);
-      sendMessage();
-    }
-
-  }, 1000);
-}
-
-function sendMessage() {
-  timeEl.textContent = "Time is up! ";
-
-
-}
-
-// setTime();
