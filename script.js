@@ -7,7 +7,7 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 var timeEl = document.querySelector('.time');
 var mainEl = document.getElementById('main');
 
-var secondsLeft = 10;
+var secondsLeft = 61;
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -48,7 +48,7 @@ function showQuestion(question) {
 }
 
 function resetState() {
-  clearStatusClass(document.body)
+  // clearStatusClass(document.body)
   nextButton.classList.add('hide')
   while (answerButtonsElement.firstChild) {
     answerButtonsElement.removeChild(answerButtonsElement.firstChild)
@@ -70,15 +70,28 @@ function selectAnswer(e) {
     startButton.classList.remove('hide')
   }
 }
+// let numCorrect = 0;
+
+// function setScore(element, correct) {
+//   clearStatusClass(element)
+//   if (correct === true ) {
+//        numCorrect++;
+
+//     console.log (numCorrect)
+//   } 
+//  }
+
 
 function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
     element.classList.add('correct')
-   } 
+    console.log (correct)
+
+  } 
   else {
     element.classList.add('wrong')
-
+    console.log('wrong')
   }
 }
 
@@ -93,13 +106,10 @@ function setTime() {
     timeEl.textContent = secondsLeft + " seconds left";
 
     if(secondsLeft === 0) {
-      clearInterval(timerInterval, secondsLeft = 10);
+      clearInterval(timerInterval, secondsLeft = 61);
       sendMessage();
       finalScore();
-
-
     }
-
   }, 1000);
 }
 
@@ -108,16 +118,13 @@ function finalScore() {
   startButton.innerText = 'Restart'
   startButton.classList.remove('hide')
   nextButton.classList.add('hide')
-  while (answerButtonsElement.firstChild) {
-    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
-    questionContainerElement.classList.add('hide')
-  }
+  questionContainerElement.classList.add('hide')
 }
 
 function sendMessage() {
   timeEl.textContent = "Time is up! ";
-
 }
+
 
 const questions = [
   {
