@@ -7,7 +7,7 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 var timeEl = document.querySelector('.time');
 var mainEl = document.getElementById('main');
 
-var secondsLeft = 60;
+var secondsLeft = 10;
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -75,9 +75,10 @@ function setStatusClass(element, correct) {
   clearStatusClass(element)
   if (correct) {
     element.classList.add('correct')
-  } 
+   } 
   else {
     element.classList.add('wrong')
+
   }
 }
 
@@ -92,26 +93,31 @@ function setTime() {
     timeEl.textContent = secondsLeft + " seconds left";
 
     if(secondsLeft === 0) {
-      clearInterval(timerInterval);
+      clearInterval(timerInterval, secondsLeft = 10);
       sendMessage();
+      finalScore();
+
 
     }
 
   }, 1000);
 }
 
+function finalScore() {
+  clearStatusClass(document.body)
+  startButton.innerText = 'Restart'
+  startButton.classList.remove('hide')
+  nextButton.classList.add('hide')
+  while (answerButtonsElement.firstChild) {
+    answerButtonsElement.removeChild(answerButtonsElement.firstChild)
+    questionContainerElement.classList.add('hide')
+  }
+}
+
 function sendMessage() {
   timeEl.textContent = "Time is up! ";
 
 }
-
-// function score (){
-//   var score = 0
-//   for (correct = true; i <= length - 1; i++) {
-//     password = password + CombinedCharacters[Math.floor(Math.random() * CombinedCharacters.length)]; 
-//   }
-//   return password
-// }
 
 const questions = [
   {
