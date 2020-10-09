@@ -68,17 +68,10 @@ function selectAnswer(e) {
     startButton.innerText = 'Restart'
     startButton.classList.remove('hide')
   }
+
+
+
 }
-// let numCorrect = 0;
-
-// function setScore(element, correct) {
-//   clearStatusClass(element)
-//   if (correct === true ) {
-//        numCorrect++;
-
-//     console.log (numCorrect)
-//   } 
-//  }
 
 
 function setStatusClass(element, correct) {
